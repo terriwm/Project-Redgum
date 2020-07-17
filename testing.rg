@@ -36,3 +36,5 @@ fn function (x, y){
     x += y
     return(x)
 }
+
+fn function()

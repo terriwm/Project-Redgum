@@ -7,6 +7,7 @@ code.lexing()
 
 codeeee = transpiler(code.return_tokens())
 
+#for debug purposes only
 for i in code.return_tokens():
     print(i)
 

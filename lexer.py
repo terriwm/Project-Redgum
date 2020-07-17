@@ -74,9 +74,16 @@ class lexer ():
                 self.tokens.append('ID: '+ str(self.sc[i][0 : self.sc[i].find('/')]) +' OP: / '+ str(self.sc[i][self.sc[i].find('=') + 1 : len(self.sc[i])]))
 
             #functions
-            if self.sc[i].find('fn') != -1:
+            if self.sc[i].find('fn') != -1 and self.sc[i].find('{') != -1:
                 self.tokens.append('FN: '+ str(self.sc[i][self.sc[i].find('fn') + 2 : self.sc[i].find('(')]) +' VAR: '+ str(self.sc[i][self.sc[i].find('(') + 1 : self.sc[i].find(')')]))
                 self.tokens.append('ID: {')
+            if self.sc[i].find('fn') != -1 and self.sc[i].find('{') == -1:
+                self.tokens.append('FN: '+ str(self.sc[i][self.sc[i].find('fn') + 2 : self.sc[i].find('(')]) + ' OP: '+ str(self.sc[i][self.sc[i].find('(') + 1 : self.sc[i].find(')')]))
+
+
+            #built in functions
+            if self.sc[i].find('return') != -1:
+                self.tokens.append('ID: return OP: ' + str(self.sc[i][self.sc[i].find('(') + 1 : self.sc[i].find(')')]))
    
 
 

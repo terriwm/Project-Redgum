@@ -67,9 +67,17 @@ class transpiler ():
                 self.indentation_level -= 1
 
             #functions
-            if token.find('FN:') != -1:
+            if token.find('FN:') != -1 and token.find('VAR') != -1:
                 function_dec = 'def' + str(token[token.find('FN:') + 3 : token.find('VAR:')]) + '(' + str(token[token.find('VAR:') + 5 : len(token)]) + '):'
                 self.transpiled_file.append(self.curr_indentation + function_dec)
+            if token.find('FN:') != -1 and token.find('VAR') == -1:
+                function_op = str(token[token.find('FN:') + 4 : token.find('OP:') - 1]) + '(' + str(token[token.find('OP:') + 4 : len(token)]) + ')'
+                self.transpiled_file.append(self.curr_indentation + function_op)
+
+            #built in functions
+            if token.find('return') != -1:
+                return_func = 'return('+ str(token[token.find('OP:') + 4 : len(token)]) + ')'
+                self.transpiled_file.append(self.curr_indentation + return_func)
 
     def write_file(self):
         self.raw_transpiled_file.writelines('#!/usr/bin/env python3\n')

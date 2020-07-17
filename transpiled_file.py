@@ -22,3 +22,5 @@ for i in range(15):
   j /= 2
 def function (x,y):
   x += y
+  return(x)
+function()
