@@ -14,13 +14,17 @@ print(h)
 if h>i and j==i:
   i += 1
   h /= 2
+elif h<i:
+  print('hi')
+else:
+  print('no')
 print(i)
 print(h)
-while True:
+while h>2:
   h /= 2
 for i in range(15):
   j /= 2
 def function (x,y):
   x += y
   return(x)
-function()
+function(1,2)

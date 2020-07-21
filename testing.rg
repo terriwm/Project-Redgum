@@ -19,12 +19,16 @@ print(h)
 if (h > i && j == i){
     i += 1
     h /= 2
+} elseif(h < i) {
+    print('hi')
+} else {
+    print('no')
 }
 
 print(i)
 print(h)
 
-while (true){
+while (h > 2){
     h /= 2
 }
 
@@ -37,4 +41,4 @@ fn function (x, y){
     return(x)
 }
 
-fn function()
+fn function(1, 2)

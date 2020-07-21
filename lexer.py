@@ -34,19 +34,28 @@ class lexer ():
                     if line[x + 1 : y] == stripped_string:
                         line = line.replace(line[x + 1 : y], self.strings[i])
             self.sc.append(line)
-        
 
 
     def lexing (self):
         for i in range(0, len(self.sc)):
+
+            #braces
+            if self.sc[i].find('}') != -1:
+                self.tokens.append('ID: }')
 
             #var def
             if self.sc[i][0:3] == 'var':
                 self.tokens.append('ID: '+ str(self.sc[i][self.sc[i].find('var') + 3 : self.sc[i].find('=')]) + ' VAL: '+ str(self.sc[i][self.sc[i].find('=') + 1 : len(self.sc[i])]))
 
             #while, for and if statements
-            if self.sc[i][0:2] == 'if':
+            if self.sc[i].find('if') != -1 and self.sc[i].find('elseif') == -1:
                 self.tokens.append('ID: if OP: '+ str(self.sc[i][self.sc[i].find('(') + 1 : self.sc[i].find(')')]))
+                self.tokens.append('ID: {')
+            if self.sc[i].find('elseif') != -1:
+                self.tokens.append('ID: elif OP: '+ str(self.sc[i][self.sc[i].find('(') + 1 : self.sc[i].find(')')]))
+                self.tokens.append('ID: {')
+            if self.sc[i].find('else') != -1 and self.sc[i].find('elseif') == -1:
+                self.tokens.append('ID: else')
                 self.tokens.append('ID: {')
             if self.sc[i][0:5] == 'while':
                 self.tokens.append('ID: while OP: '+ str(self.sc[i][self.sc[i].find('(') + 1 : self.sc[i].find(')')]))
@@ -54,10 +63,6 @@ class lexer ():
             if self.sc[i][0:3] == 'for':
                 self.tokens.append('ID: for VAR: '+ str(self.sc[i][self.sc[i].find('(') + 1 : self.sc[i].find('=>')]) + ' OP: ' + str(self.sc[i][self.sc[i].find('=>') + 2: self.sc[i].find(')') + 1]))
                 self.tokens.append('ID: {')
-
-            #closing a brace
-            if self.sc[i].find('}') != -1:
-                self.tokens.append('ID: }')
 
             #basic printing and other statements
             if self.sc[i][0:5] == 'print':

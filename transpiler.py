@@ -49,9 +49,15 @@ class transpiler ():
                 self.transpiled_file.append(self.curr_indentation + division)
 
             #if, for & while
-            if token.find('if') != -1:
+            if token.find('if') != -1 and token.find('elif') == -1:
                 if_statement = 'if ' + str(token[token.find('OP:') + 4 : len(token)]) + ':'
                 self.transpiled_file.append(self.curr_indentation + if_statement)
+            if token.find('elif') != -1:
+                elif_statement = 'elif '+ str(token[token.find('OP:') + 4 : len(token)]) + ':'
+                self.transpiled_file.append(self.curr_indentation + elif_statement)
+            if token.find('else') != -1:
+                else_statement = 'else:'
+                self.transpiled_file.append(self.curr_indentation + else_statement)
             if token.find('while') != -1:
                 while_op = token[token.find('OP:') + 4 : len(token)]
                 while_statement = 'while ' + while_op +':'
