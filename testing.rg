@@ -29,11 +29,11 @@ print(i)
 print(h)
 
 while (h > 2){
-    h /= 2
+    h--
 }
 
 for (i => range(15)){
-    j /= 2
+    j++
 }
 
 fn function (x, y){

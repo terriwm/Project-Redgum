@@ -21,9 +21,9 @@ else:
 print(i)
 print(h)
 while h>2:
-  h /= 2
+  h -= 1
 for i in range(15):
-  j /= 2
+  j += 1
 def function (x,y):
   x += y
   return(x)
