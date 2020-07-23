@@ -1,5 +1,3 @@
-import os
-
 class transpiler ():
     def __init__(self, tokens):
         self.tokens = tuple(tokens)
@@ -30,9 +28,12 @@ class transpiler ():
                 
 
             #printing
-            if token.find('print') != -1:
+            if token.find('print') != -1 and token.find('println') == -1:
                 printing = str(token[token.find('OP:') + 4 : len(token)])
-                self.transpiled_file.append(self.curr_indentation + 'print('+ printing +')')
+                self.transpiled_file.append(self.curr_indentation + 'print('+ printing +', end="")')
+            if token.find('println') != -1:
+                println = str(token[token.find('OP:') + 4 : len(token)])
+                self.transpiled_file.append(self.curr_indentation + 'print('+ println +')')
 
             #maths
             if token.find('+') != -1:

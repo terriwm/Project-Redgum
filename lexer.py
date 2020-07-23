@@ -65,8 +65,10 @@ class lexer ():
                 self.tokens.append('ID: {')
 
             #basic printing and other statements
-            if self.sc[i][0:5] == 'print':
+            if self.sc[i].find('print') != -1 and self.sc[i].find('println') == -1:
                 self.tokens.append('ID: print OP: '+ str(self.sc[i][self.sc[i].find('(') + 1 : self.sc[i].find(')')]))
+            if self.sc[i].find('println') != -1:
+                self.tokens.append('ID: println OP: '+ str(self.sc[i][self.sc[i].find('(') + 1 : self.sc[i].find(')')]))
 
             #maths
             if self.sc[i].find('+=') != -1:

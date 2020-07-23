@@ -2,7 +2,7 @@
 var h = 74380
 var i = 0
 var j = 9.532
-var k = 'hello world'
+var k = 'hello world\n'
 var l = 0b01101101
 var m = false
 var n = 0x733AFB
@@ -13,7 +13,7 @@ var q = input('wassup')
 
 //this is a comment
 
-print(i)
+println(i)
 print(h)
 
 if (h > i && j == i){
