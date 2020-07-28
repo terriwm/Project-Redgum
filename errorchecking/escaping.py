@@ -17,23 +17,25 @@ def tests(fp: str):
     text = rg_file.read()
     stripped_text = text.strip()
 
-def strip_comments(text: str):
+def strip_comments(text: str): # strip the comments out for better checking
     
-    regions = find_string_regions(text.strip())
-    print(regions)
-    print(text.count("//"))
-    excluded = []
-    for i in range(text.count("//")): 
-        start = text.index("//", greatest(excluded) + 1)
-        valid = True
-        for reg in regions:
-            if reg[0] < start < reg[1]:
-                valid = False
-        if valid:
+    regions = find_string_regions(text.strip()) # all of the regions encased in strings
+    print(str(regions) + " PrintCodeA - String Regions") # for debug purposes
+    print(str(text.count("//")) + " PrintCodeB - Amount of //") # for debug purposes
+    excluded = [] # a list of the things that should not be comments because theyr'e in strings
+    for i in range(text.count("//")):  # for every double-slash
+        start = text.index("//", greatest(excluded) + 1) # it starts at the first found that hasn't already been processed
+        valid = True # if the comment is still a comment
+        for reg in regions: # for every string region
+            if reg[0] < start < reg[1]: # if it's inside the region
+                valid = False # it isn't valid, its in the string
+        if valid: # after that, if its valid still
             text = text[:text.index("//", greatest(excluded) + 1)] + text[text.index("\n", text.index("//", greatest(excluded) + 1)):]
+            # remove it from the text to fix
         else:
-            excluded.append(text.index("//"))
-    print(excluded)
+            excluded.append(text.index("//", greatest(excluded) + 1))
+            # otherwise, it is excluded from future searches
+    print(str(excluded) + " PrintCodeC - Excluded Regions")
     return text
         
 def find_string_regions(stripped_text: str):
@@ -43,7 +45,7 @@ def find_string_regions(stripped_text: str):
     string_regions = [] 
     temptext = stripped_text
     for char in quote_chars:
-        for i in range(stripped_text.count(char) // 2):
+        for _ in range(stripped_text.count(char) // 2):
             string_regions.append((temptext.index(char) + removedchars, temptext.index(char,temptext.index(char) + 1) + removedchars))
             temptext = temptext[:temptext.index(char)] + temptext[temptext.index(char) + 1:]
             temptext = temptext[:temptext.index(char)] + temptext[temptext.index(char) + 1:]
@@ -60,7 +62,7 @@ def escaped_parentheses(stripped_text: str):
 #"hello // hi \n hello"
 
 b = open("errorunescaped.rg", "r")
-print(strip_comments(b.read()))
+print(str(strip_comments(b.read())) + " PrintCodeD - Custom Debug")
 #print("hello // hi \nhello\n\"hi // \"\n")
 #print(find_string_regions("hello // hi \nhello\n\"hi // \"\n".strip()))
 #print(strip_comments("hello // hi \nhello\n\"hi // \"\n"))
