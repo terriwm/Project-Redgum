@@ -45,9 +45,18 @@ class transpiler ():
             if token.find('*') != -1:
                 multiplication = str(token[token.find('ID:') + 4 : token.find('OP:')] +'*= '+ str(token[token.find('*') + 2 : len(token)]))
                 self.transpiled_file.append(self.curr_indentation + multiplication)
-            if token.find('/') != -1:
+            if token.find('/') != -1 and token.find('//') == -1:
                 division = str(token[token.find('ID:') + 4 : token.find('OP:')] +'/= '+ str(token[token.find('/') + 2 : len(token)]))
                 self.transpiled_file.append(self.curr_indentation + division)
+            if token.find('//') != -1:
+                floor_div = str(token[token.find('ID:') + 4 : token.find('OP:')]) + '= ' + str(token[token.find('OP:') + 4 : len(token)])
+                self.transpiled_file.append(self.curr_indentation + floor_div)
+            if token.find('floor') != -1:
+                floor = str(token[token.find('ID:') + 4 : token.find('OP:')] + '= math.floor(' + str(token[token.find('floor') + 6 : len(token)]) +')')
+                self.transpiled_file.append(self.curr_indentation + floor)
+            if token.find('%') != -1:
+                modulo = str(token[token.find('ID:') + 4: token.find('OP:')]) +'%='+ str(token[token.find('%') + 1 : len(token)])
+                self.transpiled_file.append(self.curr_indentation + modulo)
 
             #if, for & while
             if token.find('if') != -1 and token.find('elif') == -1:
@@ -88,6 +97,7 @@ class transpiler ():
 
     def write_file(self):
         self.raw_transpiled_file.writelines('#!/usr/bin/env python3\n')
+        self.raw_transpiled_file.writelines('import math\n')
         for line in self.transpiled_file:
             self.raw_transpiled_file.writelines(line + '\n')
 

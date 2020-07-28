@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import math
 h = 74380
 i = 0
 j = 9.532
@@ -28,3 +29,6 @@ def function (x,y):
   x += y
   return(x)
 function(1,2)
+h = i // 2
+i %= 2
+j = math.floor(j)

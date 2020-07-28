@@ -83,6 +83,12 @@ class lexer ():
                 self.tokens.append('ID: '+ str(self.sc[i][0 : self.sc[i].find('++')]) +' OP: + 1')
             if self.sc[i].find('--') != -1:
                 self.tokens.append('ID: '+ str(self.sc[i][0 : self.sc[i].find('--')]) +' OP: - 1')
+            if self.sc[i].find('_/') != -1:
+                self.tokens.append('ID: '+ str(self.sc[i][0 : self.sc[i].find('=')]) +' OP: '+ str(self.sc[i][self.sc[i].find('=') + 1 : self.sc[i].find('_/')]) + ' // '+ str(self.sc[i][self.sc[i].find('_/') + 2 : len(self.sc[i])]))
+            if self.sc[i].find('__') != -1:
+                self.tokens.append('ID: '+ str(self.sc[i][0 : self.sc[i].find('=')]) + ' OP: floor '+ str(self.sc[i][self.sc[i].find('__') + 2 : len(self.sc[i])]))
+            if self.sc[i].find('%=') != -1:
+                self.tokens.append('ID: '+ str(self.sc[i][0 : self.sc[i].find('%')]) +' OP: % '+ str(self.sc[i][self.sc[i].find('%=') + 2 : len(self.sc[i])]))
 
             #functions
             if self.sc[i].find('fn') != -1 and self.sc[i].find('{') != -1:

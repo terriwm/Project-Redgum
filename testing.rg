@@ -42,3 +42,9 @@ fn function (x, y){
 }
 
 fn function(1, 2)
+
+h = i _/ 2
+
+i %= 2
+
+j = __j
