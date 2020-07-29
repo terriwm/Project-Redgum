@@ -8,11 +8,11 @@ code.lexing()
 codeeee = transpiler(code.return_tokens())
 
 #for debug purposes only
-for i in code.return_tokens():
-    print(i)
+'''for i in code.return_tokens():
+    print(i)'''
 
 codeeee.transpile()
 
 codeeee.write_file()
 
-#import transpiled_file
+import transpiled_file
