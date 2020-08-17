@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+alias Redgum=python3\ main.py

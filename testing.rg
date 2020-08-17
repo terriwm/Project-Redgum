@@ -1,4 +1,3 @@
-
 var h = 74380
 var i = 0
 var j = 9.532
@@ -48,3 +47,5 @@ h = i _/ 2
 i %= 2
 
 j = __j
+
+say('hello')

@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 import math
+import gTTS
+import os
+import playsound
 h = 74380
 i = 0
 j = 9.532
@@ -10,17 +13,17 @@ n = 0x733AFB
 o = ['a','b','c']
 p = (1,2,3)
 q = input('wassup')
-print(i)
-print(h, end="")
+print(i,end="")
+print(h)
 if h>i and j==i:
   i += 1
   h /= 2
 elif h<i:
-  print('hi', end="")
+  print('hi')
 else:
-  print('no', end="")
-print(i, end="")
-print(h, end="")
+  print('no')
+print(i)
+print(h)
 while h>2:
   h -= 1
 for i in range(15):
@@ -29,6 +32,9 @@ def function (x,y):
   x += y
   return(x)
 function(1,2)
-h = i // 2
 i %= 2
 j = math.floor(j)
+say = gTTS'hello'
+say.save("speak.mp3")
+playsound.playsound("speak.mp3")
+os.remove("speak.mp3")
