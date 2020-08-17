@@ -45,7 +45,7 @@ class transpiler (): # Creates a class called "transpiler"
 					printer = str(token[token.find('OP:') + 4 : len(token)])
 					self.transpiled_file.append(self.curr_indentation + 'print('+ printer +'%s)' % temp)
 				if token.find('say') != -1:
-					say = 'say = gTTS'+ str(token[token.find('OP:') + 4: len(token)])
+					say = 'say = gTTS('+ str(token[token.find('OP:') + 4: len(token)]) +')'
 					self.transpiled_file.append(self.curr_indentation + say)
 					self.transpiled_file.append(self.curr_indentation + 'say.save("speak.mp3")')
 					self.transpiled_file.append(self.curr_indentation + 'playsound.playsound("speak.mp3")')
@@ -80,7 +80,7 @@ class transpiler (): # Creates a class called "transpiler"
 					self.transpiled_file.append(self.curr_indentation + modulo)
 
 			#if, for & while
-			if token.token('BASEOP:') != -1:
+			if token.find('BASE:') != -1:
 				if token.find('if') != -1 and token.find('elif') == -1:
 					if_statement = 'if ' + str(token[token.find('OP:') + 4 : len(token)]) + ':'
 					self.transpiled_file.append(self.curr_indentation + if_statement)
@@ -99,7 +99,7 @@ class transpiler (): # Creates a class called "transpiler"
 					self.transpiled_file.append(self.curr_indentation + for_statement)
 
 			#Indents
-			of token.find('BRACE:') != -1:
+			if token.find('BRACE:') != -1:
 				if token.find('ID: {') != -1:
 					self.indentation_level += 1
 				if token.find('ID: }') != -1:

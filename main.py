@@ -11,7 +11,7 @@ code = lexer(open(file))
 
 code.lexing()
 
-DebugLevel = 2
+DebugLevel = 1
 # Lvl 1 = Basic Logging
 # Lvl 2 = Intermediate Logging
 # Lvl 3 = Full logging

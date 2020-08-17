@@ -50,19 +50,19 @@ class lexer ():
 
 			#while, for and if statements
 			if self.sc[i].find('if') != -1 and self.sc[i].find('elseif') == -1:
-				self.tokens.append('BASEOP: ID: if OP: '+ str(self.sc[i][self.sc[i].find('(') + 1 : self.sc[i].find(')')]))
+				self.tokens.append('BASE: ID: if OP: '+ str(self.sc[i][self.sc[i].find('(') + 1 : self.sc[i].find(')')]))
 				self.tokens.append('BRACE: ID: {')
 			if self.sc[i].find('elseif') != -1:
-				self.tokens.append('BASEOP: ID: elif OP: '+ str(self.sc[i][self.sc[i].find('(') + 1 : self.sc[i].find(')')]))
+				self.tokens.append('BASE: ID: elif OP: '+ str(self.sc[i][self.sc[i].find('(') + 1 : self.sc[i].find(')')]))
 				self.tokens.append('BRACE: ID: {')
 			if self.sc[i].find('else') != -1 and self.sc[i].find('elseif') == -1:
-				self.tokens.append('BASEOP: ID: else')
+				self.tokens.append('BASE: ID: else')
 				self.tokens.append('BRACE: ID: {')
 			if self.sc[i][0:5] == 'while':
-				self.tokens.append('BASEOP: ID: while OP: '+ str(self.sc[i][self.sc[i].find('(') + 1 : self.sc[i].find(')')]))
+				self.tokens.append('BASE: ID: while OP: '+ str(self.sc[i][self.sc[i].find('(') + 1 : self.sc[i].find(')')]))
 				self.tokens.append('BRACE: ID: {')
 			if self.sc[i][0:3] == 'for':
-				self.tokens.append('BASEOP: ID: for VAR: '+ str(self.sc[i][self.sc[i].find('(') + 1 : self.sc[i].find('=>')]) + ' OP: ' + str(self.sc[i][self.sc[i].find('=>') + 2: self.sc[i].find(')') + 1]))
+				self.tokens.append('BASE: ID: for VAR: '+ str(self.sc[i][self.sc[i].find('(') + 1 : self.sc[i].find('=>')]) + ' OP: ' + str(self.sc[i][self.sc[i].find('=>') + 2: self.sc[i].find(')') + 1]))
 				self.tokens.append('BRACE: ID: {')
 
 			#basic printing and other statements
